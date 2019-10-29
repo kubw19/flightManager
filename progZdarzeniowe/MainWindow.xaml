@@ -28,10 +28,10 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Canvas Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Background="#FFF3F3F3" MouseLeftButtonDown="Canvas_MouseLeftButtonDown">
+        <Canvas Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Background="#FFB9B9B9" MouseLeftButtonDown="Canvas_MouseLeftButtonDown">
             <Image Height="10" Width="10" Margin="10" Source="/images/plane.png"/>
-            <TextBlock Margin="25, 7" Text="flightManager" Foreground="#FFDEDEDE"></TextBlock>
-            <Button x:Name="closeButton" Style="{StaticResource ImageButtonStyle}" Height="16" Width="16" Margin="975,7,5,7" Cursor="Hand" Click="CloseButton_Click">
+            <TextBlock Margin="25, 7" Text="flightManager" Foreground="#FFFDFDFD" OpacityMask="Black"></TextBlock>
+            <Button x:Name="closeButton" Style="{StaticResource ImageButtonStyle}" Height="10" Width="12" Margin="980,10,5,8" Cursor="Hand" Click="CloseButton_Click">
                 <Image>
                     <Image.Source>
                         <BitmapImage DecodePixelWidth="300" UriSource="/images/close-button.png" />
