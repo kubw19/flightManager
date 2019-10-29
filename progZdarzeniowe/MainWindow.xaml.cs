@@ -51,16 +51,36 @@ namespace progZdarzeniowe
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
             Domain.Flight flight = new Domain.Flight();
-            flight.arrPlace = 2;
-            flight.depPlace = 3;
+            flight.arrPlace = "2";
+            flight.depPlace = "3";
 
 
             using (mySession.BeginTransaction())
             {
                 mySession.Save(flight);
+                //pp.ItemsSource = mySession.QueryOver<Domain.Flight>().List();
+                Console.WriteLine(mySession.QueryOver<Domain.Flight>().List());
                 mySession.Transaction.Commit();
             }
+
+            Domain.Flight[] flights = new Domain.Flight[2];
+            flights[0] = flight;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

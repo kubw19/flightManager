@@ -8,9 +8,9 @@ namespace progZdarzeniowe.Domain
 {
     public class Flight
     {
-        public virtual int flightId { get; set; }
-        public virtual int depPlace { get; set; }
-        public virtual int arrPlace { get; set; }
+        public virtual int flightId { get; protected set; }
+        public virtual string depPlace { get; set; }
+        public virtual string arrPlace { get; set; }
 
     }
 

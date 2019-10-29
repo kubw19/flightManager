@@ -5,9 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:progZdarzeniowe"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="324,175,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize" WindowStyle="None">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Canvas Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Background="#FFF3F3F3" MouseLeftButtonDown="Canvas_MouseLeftButtonDown">
+            <Image Height="10" Width="10" Margin="10" Source="/images/plane.png"/>
+            <TextBlock Margin="25, 7" Text="flightManager" Foreground="#FFDEDEDE"></TextBlock>
+            <Button x:Name="closeButton" Style="{StaticResource ImageButtonStyle}" Height="16" Width="16" Margin="975,7,5,7" Cursor="Hand" Click="CloseButton_Click">
+                <Image>
+                    <Image.Source>
+                        <BitmapImage DecodePixelWidth="300" UriSource="/images/close-button.png" />
+                    </Image.Source>
+                </Image>
+            </Button>
+        </Canvas>
+        <Canvas Grid.Column="0" Grid.Row="1" Background="#FF383838"/>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Flight Manager" FontFamily="Segoe UI Light" FontSize="36"/>
+        </Grid>
     </Grid>
+
+
 </Window>
