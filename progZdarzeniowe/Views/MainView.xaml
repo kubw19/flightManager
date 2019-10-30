@@ -1,0 +1,142 @@
+﻿<Window x:Class="progZdarzeniowe.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:progZdarzeniowe.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize" WindowStyle="None" Background="#FFF9F9F9">
+    <Window.Resources>
+        <!--Przycisk ze zdjęcia-->
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Menu item-->
+        <Style TargetType="{x:Type Button}" x:Key="MenuItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="0,20" />
+            <Style.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Margin" Value="10,0" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Górny pasek-->
+        <Canvas Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Background="#FFB9B9B9" MouseLeftButtonDown="Canvas_MouseLeftButtonDown">
+            <Image Height="10" Width="10" Margin="10" Source="/images/plane.png"/>
+            <TextBlock Margin="25, 7" Text="flightManager" Foreground="#FFFDFDFD" OpacityMask="Black"></TextBlock>
+            <Button x:Name="closeApplication" Style="{StaticResource ImageButtonStyle}" Height="10" Width="12" Margin="980,10,5,8" Cursor="Hand" Click="CloseApplication_Click">
+                <Image>
+                    <Image.Source>
+                        <BitmapImage DecodePixelWidth="300" UriSource="/images/close-button.png" />
+                    </Image.Source>
+                </Image>
+            </Button>
+        </Canvas>
+
+        <!--Boczny pasek-->
+        <Canvas Grid.Column="0" Grid.Row="1" Background="#FF383838" Grid.ColumnSpan="2" Margin="0,0,820,0">
+            <Grid Margin="0,40" Width="160">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="350"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image RenderTransformOrigin="0.5,0.5" Margin="4,-33,21,33" Grid.ColumnSpan="2">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="2.2" ScaleY="2.2"/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                    <Image.Source>
+                        <BitmapImage DecodePixelWidth="300" UriSource="/images/logo.png" />
+                    </Image.Source>
+                </Image>
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                    <Button Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/images/plane.png" />
+                                </Image.Source>
+                            </Image>
+                            <TextBlock>Log in</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/images/plane.png" />
+                                </Image.Source>
+                            </Image>
+                            <TextBlock>Book a flight</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="300" UriSource="/images/plane.png" />
+                                </Image.Source>
+                            </Image>
+                            <TextBlock>Manage flights</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </Canvas>
+
+        <!--Zawartość-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <ContentControl Grid.Row="1" Grid.Column="1" x:Name="ActiveItem"></ContentControl>
+        </Grid>
+    </Grid>
+
+
+</Window>
