@@ -1,4 +1,7 @@
 ﻿using Caliburn.Micro;
+using NHibernate;
+using NHibernate.Cfg;
+using progZdarzeniowe.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +13,11 @@ namespace progZdarzeniowe.ViewModels
 {
     class MainViewModel : Conductor<object>
     {
-
         public MainViewModel()
         {
+            Database.OpenSession();
             ActivateItem(new BookFlightViewModel());
         }
+
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:progZdarzeniowe.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize" WindowStyle="None" Background="#FFF9F9F9">
+        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize" WindowStyle="None" Background="White">
     <Window.Resources>
         <!--Przycisk ze zdjęcia-->
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
@@ -127,14 +127,12 @@
         <!--Zawartość-->
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ContentControl Grid.Row="1" Grid.Column="1" x:Name="ActiveItem"></ContentControl>
+            <ContentControl Grid.Row="0" Grid.Column="0" x:Name="ActiveItem"></ContentControl>
         </Grid>
     </Grid>
 

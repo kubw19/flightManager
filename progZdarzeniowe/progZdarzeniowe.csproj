@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Domain\Flight.cs" />
+    <Compile Include="Models\Database.cs" />
     <Compile Include="ViewModels\BookFlightViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\BookFlightView.xaml.cs">
@@ -136,9 +137,7 @@
   <ItemGroup>
     <Resource Include="images\plane.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\BookFlightView.xaml">
       <SubType>Designer</SubType>
@@ -151,6 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\logo.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Flight.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
