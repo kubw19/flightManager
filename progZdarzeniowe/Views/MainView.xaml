@@ -109,7 +109,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
+                    <Button Style="{StaticResource MenuItem}" Height="18" Width="Auto">
                         <StackPanel Orientation="Horizontal">
                             <Image>
                                 <Image.Source>

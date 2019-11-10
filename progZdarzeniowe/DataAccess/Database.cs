@@ -4,20 +4,32 @@ using System;
 using System.Collections.Generic;
 using System.Web;
 
-namespace progZdarzeniowe.Models
+namespace progZdarzeniowe.DataAccess
 {
     public class Database
     {
         private static Configuration configuration;
-        private static ISession session;
-        public static ISession Session { get => session; set => session = value; }
+
+        public static ISession Session { get; set; }
 
         public static void OpenSession()
         {
             configuration = new Configuration();
             configuration.Configure();
             ISessionFactory sessionFactory = configuration.BuildSessionFactory();
-            session = sessionFactory.OpenSession();
+            Session = sessionFactory.OpenSession();
+        }
+
+        public static void add(object obj)
+        {
+            Database.Session.Save(obj);
+            Database.Session.Flush();
+        }
+
+        public static void remove(object obj)
+        {
+            Database.Session.Delete(obj);
+            Database.Session.Flush();
         }
 
     }

@@ -18,11 +18,12 @@ namespace progZdarzeniowe.Views
     /// <summary>
     /// Logika interakcji dla klasy BookFlightView.xaml
     /// </summary>
-    public partial class BookFlightView : UserControl
+    public partial class UserPanelView : UserControl
     {
-        public BookFlightView()
+        public UserPanelView()
         {
             InitializeComponent();
         }
+
     }
 }

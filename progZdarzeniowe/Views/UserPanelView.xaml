@@ -1,0 +1,207 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+             xmlns:views = "clr-namespace:progZdarzeniowe.Views"
+          xmlns:local="clr-namespace:progZdarzeniowe.Views"
+             xmlns:Models="clr-namespace:progZdarzeniowe.Models" x:Class="progZdarzeniowe.Views.UserPanelView"
+            xmlns:wpfanimated="http://wpfanimatedgif.codeplex.com"         
+    mc:Ignorable="d" 
+              d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="235"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1" FontFamily="Segoe UI Light" FontSize="36" Text="Book a Flight" Foreground="Black"/>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Height="215" Grid.Row="1" Grid.Column="0">
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding flights}">
+                        <ItemsControl.ItemTemplate >
+                            <DataTemplate>
+                                <Canvas HorizontalAlignment="Stretch" Margin="0,0,0,15" Height="55" Background="#F1F2F4">
+                                    <Grid Height="55">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="45"/>
+                                            <ColumnDefinition Width="45"/>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="45"/>
+                                            <ColumnDefinition Width="70"/>
+                                            <!--DeparturePlace-->
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="70"/>
+                                            <!--ArrivalPlace-->
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock VerticalAlignment="Center" Grid.Column="1" Text="{Binding flightNumber}"/>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Text="{Binding date}"/>
+                                        <Grid Grid.Column="5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="3"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Grid.Row="1" Text="{Binding depPlace}"/>
+                                            <TextBlock Height="auto" Width="auto" HorizontalAlignment="Center" FontSize="8" Grid.Row="3" Text="{Binding depTime}"/>
+                                        </Grid>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="6" Text="-"/>
+                                        <Grid Grid.Column="7">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="3"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Grid.Row="1" Text="{Binding arrPlace}"/>
+                                            <TextBlock Height="auto" Width="auto" HorizontalAlignment="Center" FontSize="8" Grid.Row="3" Text="{Binding arrTime}"/>
+                                        </Grid>
+                                        <Button cal:Message.Attach="[Event Click]=[bookFlight($dataContext, 'economy')]" Width="71" Height="25" Grid.Column="9" Style="{StaticResource ImageButtonStyle}">
+                                            <Canvas Background="#085081">
+                                                <StackPanel Width="71">
+                                                    <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="8" Text="Economy"/>
+                                                    <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="10" Text="{Binding economyPrice}"/>
+                                                </StackPanel>
+                                            </Canvas>
+                                        </Button>
+                                        <Button cal:Message.Attach="[Event Click]=[bookFlight($dataContext, 'business')]" Width="71" Height="25" Grid.Column="11" Style="{StaticResource ImageButtonStyle}">
+                                            <Canvas Width="71" Height="25" Background="#06485F">
+                                                <StackPanel Width="71">
+                                                    <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="8" Text="Business"/>
+                                                    <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="10" Text="{Binding businessPrice}"/>
+                                                </StackPanel>
+                                            </Canvas>
+                                        </Button>
+                                    </Grid>
+                                </Canvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <!--<Models:Flight arrTime="07:30" arrPlace="Warsaw" businessPrice="123" depTime="14:23" depPlace="Krakow" economyPrice="125" flightNumber="Lot1234" date="09.11.2019"/>-->
+                        <!--<Models:Flight arrTime="07:30" arrPlace="Warsaw" businessPrice="123" depTime="14:23" depPlace="KrakowKrakwo" economyPrice="125" flightNumber="FR234" date="09.11.2020"/>-->
+                    </ItemsControl>
+                    <Image Margin="57" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Visibility= "{Binding flightsAreFetching, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           wpfanimated:ImageBehavior.AnimatedSource="/images/spinner.gif"
+                           wpfanimated:ImageBehavior.RepeatBehavior="1"
+                           wpfanimated:ImageBehavior.AnimateInDesignMode="True"
+                           wpfanimated:ImageBehavior.AutoStart="True"              
+                           Height="100"/>
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </Grid>
+        <TextBlock Grid.Row="4" Grid.Column="1" FontFamily="Segoe UI Light" FontSize="36" Text="My flights" Foreground="Black"/>
+        <!--<ContentControl x:Name="fox"  Grid.Row="6" Grid.Column="1"></ContentControl>-->
+        <ScrollViewer Height="200" Grid.Row="6" Grid.Column="1">
+            <StackPanel>
+                <Image Margin="57" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Visibility= "{Binding flightOrdersAreFetching, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           wpfanimated:ImageBehavior.AnimatedSource="/images/spinner.gif"
+                           wpfanimated:ImageBehavior.RepeatBehavior="1"
+                           wpfanimated:ImageBehavior.AnimateInDesignMode="True"
+                           wpfanimated:ImageBehavior.AutoStart="True"              
+                           Height="100"/>
+                <!--<ItemsControl>-->
+                <ItemsControl ItemsSource="{Binding flightOrders}">
+                    <ItemsControl.ItemTemplate >
+                        <DataTemplate>
+                            <Canvas HorizontalAlignment="Stretch" Margin="0,0,0,15" Height="55" Background="#F1F2F4">
+                                <Grid Height="55">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="45"/>
+                                        <ColumnDefinition Width="45"/>
+                                        <ColumnDefinition Width="90"/>
+                                        <ColumnDefinition Width="45"/>
+                                        <ColumnDefinition Width="70"/>
+                                        <!--DeparturePlace-->
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="70"/>
+                                        <!--ArrivalPlace-->
+                                        <ColumnDefinition Width="90"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1" Text="{Binding flightNumber}"/>
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Text="{Binding date}"/>
+                                    <Grid Grid.Column="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="3"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="10"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Grid.Row="1" Text="{Binding depPlace}"/>
+                                        <TextBlock Height="auto" Width="auto" HorizontalAlignment="Center" FontSize="8" Grid.Row="3" Text="{Binding depTime}"/>
+                                    </Grid>
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="6" Text="-"/>
+                                    <Grid Grid.Column="7">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="3"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="10"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Grid.Row="1" Text="{Binding arrPlace}"/>
+                                        <TextBlock Height="auto" Width="auto" HorizontalAlignment="Center" FontSize="8" Grid.Row="3" Text="{Binding arrTime}"/>
+                                    </Grid>
+                                    <Button Grid.Column="9" Height="20" Content="Cancel this flight" cal:Message.Attach="[Event Click]=[cancelFlight($dataContext)]"></Button>
+                                </Grid>
+                            </Canvas>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                    <!--<Models:FlightOrder flightNumber="test" arrTime="07:30" arrPlace="Warsaw" depTime="14:23" depPlace="Krakow" price="125" date="09.11.2019"/>
+                    <Models:FlightOrder flightNumber="test" arrTime="07:30" arrPlace="Warsaw" depTime="14:23" depPlace="Krakow" price="125" date="09.11.2019"/>
+                    <Models:FlightOrder flightNumber="test" arrTime="07:30" arrPlace="Warsaw" depTime="14:23" depPlace="Krakow" price="125" date="09.11.2019"/>
+                    <Models:FlightOrder flightNumber="test" arrTime="07:30" arrPlace="Warsaw" depTime="14:23" depPlace="Krakow" price="125" date="09.11.2019"/>-->
+
+                    <!--<Models:FlightOrder arrTime="07:30" arrPlace="Warsaw" depTime="14:23" depPlace="Krakow" price="125" date="09.11.2019"/>-->
+                    <!--<Models:FlightOrder arrTime="07:30" arrPlace="Warsaw" depTime="14:23" depPlace="Krakow" price="125" date="09.11.2019"/>-->
+                </ItemsControl>
+            </StackPanel>
+
+        </ScrollViewer>
+    </Grid>
+</UserControl>

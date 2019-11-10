@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="progZdarzeniowe.Models" assembly="progZdarzeniowe">
-  <class name="Flight" table="flights">
-    <id name="flightId" column="flightId">
+  <class name="FlightOrder" table="flightOrders">
+    <id name="flightOrderId" column="flightOrderId">
       <generator class="increment" />
     </id>
     <property name="depPlace" column="depPlace" />
     <property name="arrPlace" column="arrPlace" />
     <property name="arrTime" column="arrTime" />
     <property name="depTime" column="depTime" />
-    <property name="economyPrice" column="economyPrice" />
-    <property name="businessPrice" column="businessPrice" />
-    <property name="flightNumber" column="flightNumber" />
+    <property name="price" column="price" />
     <property name="date" column="date" />
+    <property name="flightNumber" column="flightNumber" />
+    <property name="userId" column="userId" />
   </class>
 </hibernate-mapping>

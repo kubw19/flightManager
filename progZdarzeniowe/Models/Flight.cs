@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace progZdarzeniowe.Models
+﻿namespace progZdarzeniowe.Models
 {
     public class Flight
     {
@@ -16,6 +10,7 @@ namespace progZdarzeniowe.Models
         public virtual string economyPrice { get; set; }
         public virtual string businessPrice { get; set; }
         public virtual string flightNumber { get; set; }
+        public virtual string date { get; set; }
 
     }
 }
