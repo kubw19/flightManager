@@ -135,7 +135,7 @@
                            wpfanimated:ImageBehavior.RepeatBehavior="1"
                            wpfanimated:ImageBehavior.AnimateInDesignMode="True"
                            wpfanimated:ImageBehavior.AutoStart="True"              
-                           Height="100"/>
+                           Height="00"/>
                 <!--<ItemsControl>-->
                 <ItemsControl ItemsSource="{Binding flightOrders}">
                     <ItemsControl.ItemTemplate >
@@ -186,7 +186,17 @@
                                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Grid.Row="1" Text="{Binding arrPlace}"/>
                                         <TextBlock Height="auto" Width="auto" HorizontalAlignment="Center" FontSize="8" Grid.Row="3" Text="{Binding arrTime}"/>
                                     </Grid>
-                                    <Button Grid.Column="9" Height="20" Content="Cancel this flight" cal:Message.Attach="[Event Click]=[cancelFlight($dataContext)]"></Button>
+                                    <StackPanel Width="100" Grid.Column="9" Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Margin="0,20,0,19" Width="35">Price:</TextBlock>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding price}"/>
+                                    </StackPanel>
+                                    <Button Style="{StaticResource ImageButtonStyle}" Grid.Column="11" Height="20" cal:Message.Attach="[Event Click]=[cancelFlight($dataContext)]">
+                                        <Canvas Width="71" Height="15" Background="#FFE03C3C">
+                                            <DockPanel Width="71" Height="15">
+                                                <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="8" Text="Cancel this flight" />
+                                            </DockPanel>
+                                        </Canvas>
+                                    </Button>
                                 </Grid>
                             </Canvas>
                         </DataTemplate>
