@@ -99,7 +99,9 @@
                         </StackPanel>
                     </Button>
 
-                    <Button cal:Message.Attach="[Event Loaded]=[buttonInitialize($source, 'bookFlight')];[Event Click]=[bookFlight()]" Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
+                    <Button x:Name="bookFlight" 
+                            IsEnabled="{Binding bookFlightButtonEnabled}"
+                            Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
                         <StackPanel Orientation="Horizontal">
                             <Image>
                                 <Image.Source>
@@ -110,7 +112,9 @@
                         </StackPanel>
                     </Button>
 
-                    <Button cal:Message.Attach="[Event Loaded]=[buttonInitialize($source, 'manageFlightsButton')];[Event Click]=[manageFlights()]" Style="{StaticResource MenuItem}" Cursor="Hand" Height="18" Width="Auto">
+                    <Button x:Name="manageFlights" 
+                            IsEnabled="{Binding manageFlightsButtonEnabled}"
+                            Style="{StaticResource MenuItem}" Cursor="Hand" Height="18" Width="Auto">
                         <StackPanel Orientation="Horizontal">
                             <Image>
                                 <Image.Source>

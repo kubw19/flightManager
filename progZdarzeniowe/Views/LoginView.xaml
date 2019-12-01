@@ -32,7 +32,7 @@
             <TextBox cal:Message.Attach="[Event GotFocus]=[passwordClick($source)];
                      [Event LostFocus]=[passwordLeave($source)]"   
                      HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="120"/>
-            <Button>Log in</Button>
+            <Button x:Name="loginButton">Log in</Button>
         </StackPanel>
     </Grid>
 </UserControl>

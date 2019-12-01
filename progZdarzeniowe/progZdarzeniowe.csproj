@@ -100,6 +100,7 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="DataAccess\Database.cs" />
+    <Compile Include="Models\ComEvent.cs" />
     <Compile Include="Models\FlightOrder.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

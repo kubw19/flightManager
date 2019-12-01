@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using progZdarzeniowe.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,11 @@ namespace progZdarzeniowe.ViewModels
 {
     class LoginViewModel : Screen
     {
+        private IEventAggregator _Events;
+        public LoginViewModel(IEventAggregator events)
+        {
+            _Events = events;
+        }
         public void emailClick(TextBox email)
         {
             email.Text = "";
@@ -26,6 +32,11 @@ namespace progZdarzeniowe.ViewModels
         public void passwordLeave(TextBox password)
         {
             if (password.Text == "") password.Text = "Password";
+        }
+
+        public void loginButton()
+        {
+            _Events.PublishOnUIThread(new ComEvent("loggedAdmin"));
         }
     }
 }

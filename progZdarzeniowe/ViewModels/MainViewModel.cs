@@ -13,31 +13,19 @@ using System.Windows.Controls;
 
 namespace progZdarzeniowe.ViewModels
 {
-    class MainViewModel : Conductor<object>
+    class MainViewModel : Conductor<object>, IHandle<ComEvent>
     {
-        private Button bookFlightButton { get; set; }
-        private Button manageFlightsButton { get; set; }
+        public bool bookFlightButtonEnabled { get; set; } = false;
+        public bool manageFlightsButtonEnabled { get; set; } = false;
 
-        public void buttonInitialize(Button but, string id = "manageFlightsButton")
-        {
-            Console.WriteLine("asd");
-            switch (id)
-            {
-                case "bookFlight":
-                    this.bookFlightButton = but;
-                    bookFlightButton.IsEnabled = false;
-                    break;
-                case "manageFlightsButton":
-                    this.manageFlightsButton = but;
-                    manageFlightsButton.IsEnabled = false;
-                    break;
-            }
-        }
+        private IEventAggregator _Events;
 
-        public MainViewModel()
+        public MainViewModel(IEventAggregator events)
         {
+            _Events = events;
             Database.OpenSession();
-            ActivateItem(new LoginViewModel());
+            ActivateItem(new LoginViewModel(_Events));
+            _Events.Subscribe(this);
         }
 
         public void manageFlights()
@@ -52,8 +40,19 @@ namespace progZdarzeniowe.ViewModels
 
         public void login()
         {
-            ActivateItem(new LoginViewModel());
+            ActivateItem(new LoginViewModel(_Events));
         }
-        
+
+        public void Handle(ComEvent message)
+        {
+            if (message.value == "loggedAdmin" || message.value == "loggedUser")
+            {
+                bookFlightButtonEnabled = true;
+                manageFlightsButtonEnabled = true;
+                NotifyOfPropertyChange(() => bookFlightButtonEnabled);
+                NotifyOfPropertyChange(() => manageFlightsButtonEnabled);
+                this.bookFlight();
+            }
+        }
     }
 }
