@@ -1,4 +1,5 @@
 ﻿<Window x:Class="progZdarzeniowe.Views.MainView"
+        xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -87,7 +88,7 @@
                     </Image.Source>
                 </Image>
                 <StackPanel Grid.Column="1" Grid.Row="1">
-                    <Button Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
+                    <Button x:Name="login" Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
                         <StackPanel Orientation="Horizontal">
                             <Image>
                                 <Image.Source>
@@ -98,7 +99,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
+                    <Button cal:Message.Attach="[Event Loaded]=[buttonInitialize($source, 'bookFlight')];[Event Click]=[bookFlight()]" Style="{StaticResource MenuItem}" Height="18" Width="Auto" Cursor="Hand">
                         <StackPanel Orientation="Horizontal">
                             <Image>
                                 <Image.Source>
@@ -109,7 +110,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource MenuItem}" Height="18" Width="Auto">
+                    <Button cal:Message.Attach="[Event Loaded]=[buttonInitialize($source, 'manageFlightsButton')];[Event Click]=[manageFlights()]" Style="{StaticResource MenuItem}" Cursor="Hand" Height="18" Width="Auto">
                         <StackPanel Orientation="Horizontal">
                             <Image>
                                 <Image.Source>

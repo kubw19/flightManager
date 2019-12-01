@@ -101,8 +101,16 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="DataAccess\Database.cs" />
     <Compile Include="Models\FlightOrder.cs" />
+    <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\UserPanelViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\AdminView.xaml.cs">
+      <DependentUpon>AdminView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserPanelView.xaml.cs">
       <DependentUpon>UserPanelView.xaml</DependentUpon>
     </Compile>
@@ -150,6 +158,14 @@
     <EmbeddedResource Include="Mappings\FlightOrder.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
