@@ -28,10 +28,18 @@ namespace progZdarzeniowe.DataAccess
             return sessionFactory.OpenSession();
         }
 
-        public static void add(object obj)
+        public static void add(object obj, ISession session = null)
         {
-            Database.Session.Save(obj);
-            Database.Session.Flush();
+            if (session == null)
+            {
+                Database.Session.Save(obj);
+                Database.Session.Flush();
+            }
+            else
+            {
+                session.SaveOrUpdate(obj);
+                session.Flush();
+            }
         }
 
         public static async Task remove(object obj, ISession session = null)
