@@ -11,14 +11,21 @@ namespace progZdarzeniowe.DataAccess
     {
         private static Configuration configuration;
 
+        private static ISessionFactory sessionFactory;
+
         public static ISession Session { get; set; }
 
         public static void OpenSession()
         {
             configuration = new Configuration();
             configuration.Configure();
-            ISessionFactory sessionFactory = configuration.BuildSessionFactory();
+            sessionFactory = configuration.BuildSessionFactory();
             Session = sessionFactory.OpenSession();
+        }
+
+        public static ISession newSession()
+        {
+            return sessionFactory.OpenSession();
         }
 
         public static void add(object obj)
@@ -27,10 +34,18 @@ namespace progZdarzeniowe.DataAccess
             Database.Session.Flush();
         }
 
-        public static async Task remove(object obj)
+        public static async Task remove(object obj, ISession session = null)
         {
-            Database.Session.Delete(obj);
-            Database.Session.Flush();
+            if (session == null)
+            {
+                Database.Session.Delete(obj);
+                Database.Session.Flush();
+            }
+            else
+            {
+                session.Delete(obj);
+                session.Flush();
+            }
         }
 
     }

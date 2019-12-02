@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -32,7 +33,7 @@ namespace progZdarzeniowe.ViewModels
             Flight flight = e.Row.Item as Flight;
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                
+                flight.date = Regex.Replace(flight.date, @"[\s].*", "");
                 Database.add(flight);
            }
         }

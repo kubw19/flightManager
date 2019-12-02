@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using System.Transactions;
+using NHibernate;
 
 namespace progZdarzeniowe.ViewModels
 {
@@ -18,8 +19,13 @@ namespace progZdarzeniowe.ViewModels
         public List<Flight> flights { get; set; }
         public List<FlightOrder> flightOrders { get; set; }
 
+        private ISession flightsSession;
+        private ISession flightOrdersSession;
+
         public UserPanelViewModel()
         {
+            flightsSession = Database.newSession();
+            flightOrdersSession = Database.newSession();
             getFlightsAsync();
             getFlightOrdersAsync();
         }
@@ -27,7 +33,7 @@ namespace progZdarzeniowe.ViewModels
         private async Task getFlightsAsync()
         {
             flightsAreFetching = true;
-            flights = await Task.Run(() => Database.Session.Query<Flight>().ToList());
+            flights = await Task.Run(() => flightsSession.Query<Flight>().ToList());
             NotifyOfPropertyChange(() => flights);
             flightsAreFetching = false;
             NotifyOfPropertyChange(() => flightsAreFetching);
@@ -35,7 +41,7 @@ namespace progZdarzeniowe.ViewModels
 
         private async Task getFlightOrdersAsync()
         {
-            flightOrders = await Task.Run(() => Database.Session.Query<FlightOrder>().Where(x => x.user == Session.currentUser).ToList());
+            flightOrders = await Task.Run(() => flightOrdersSession.Query<FlightOrder>().Where(x => x.user == Session.currentUser).ToList());
             NotifyOfPropertyChange(() => flightOrders);
             flightOrdersAreFetching = false;
             NotifyOfPropertyChange(() => flightOrdersAreFetching);
@@ -69,7 +75,7 @@ namespace progZdarzeniowe.ViewModels
         public void cancelFlight(FlightOrder flightOrder)
         {
 
-            Database.remove(flightOrder);
+            Database.remove(flightOrder, flightOrdersSession);
             getFlightOrdersAsync();
         }
     }
