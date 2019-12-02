@@ -2,6 +2,7 @@
 using NHibernate.Cfg;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace progZdarzeniowe.DataAccess
@@ -26,7 +27,7 @@ namespace progZdarzeniowe.DataAccess
             Database.Session.Flush();
         }
 
-        public static void remove(object obj)
+        public static async Task remove(object obj)
         {
             Database.Session.Delete(obj);
             Database.Session.Flush();

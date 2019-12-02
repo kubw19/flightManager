@@ -20,13 +20,8 @@ namespace progZdarzeniowe.ViewModels
 
         public UserPanelViewModel()
         {
-            prepare();
-        }
-
-        private async Task prepare()
-        {
-            await getFlightsAsync();
-            await getFlightOrdersAsync();
+            getFlightsAsync();
+            getFlightOrdersAsync();
         }
 
         private async Task getFlightsAsync()
@@ -40,7 +35,7 @@ namespace progZdarzeniowe.ViewModels
 
         private async Task getFlightOrdersAsync()
         {
-            flightOrders = await Task.Run(() => Database.Session.Query<FlightOrder>().ToList());
+            flightOrders = await Task.Run(() => Database.Session.Query<FlightOrder>().Where(x => x.user == Session.currentUser).ToList());
             NotifyOfPropertyChange(() => flightOrders);
             flightOrdersAreFetching = false;
             NotifyOfPropertyChange(() => flightOrdersAreFetching);
@@ -66,7 +61,7 @@ namespace progZdarzeniowe.ViewModels
                     break;               
 
             }
-
+            flightOrder.user = Session.currentUser;
             Database.add(flightOrder);
             getFlightOrdersAsync();
 

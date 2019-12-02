@@ -10,6 +10,6 @@
         public virtual string price { get; set; }
         public virtual string date { get; set; }
         public virtual string flightNumber { get; set; }
-        public virtual int userId { get; set; }
+        public virtual User user { get; set; }
     }
 }

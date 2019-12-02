@@ -135,7 +135,7 @@
                            wpfanimated:ImageBehavior.RepeatBehavior="1"
                            wpfanimated:ImageBehavior.AnimateInDesignMode="True"
                            wpfanimated:ImageBehavior.AutoStart="True"              
-                           Height="00"/>
+                           Height="100"/>
                 <!--<ItemsControl>-->
                 <ItemsControl ItemsSource="{Binding flightOrders}">
                     <ItemsControl.ItemTemplate >

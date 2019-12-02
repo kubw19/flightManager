@@ -45,10 +45,18 @@ namespace progZdarzeniowe.ViewModels
 
         public void Handle(ComEvent message)
         {
-            if (message.value == "loggedAdmin" || message.value == "loggedUser")
+            if (message.value == "loggedAdmin")
             {
                 bookFlightButtonEnabled = true;
                 manageFlightsButtonEnabled = true;
+                NotifyOfPropertyChange(() => bookFlightButtonEnabled);
+                NotifyOfPropertyChange(() => manageFlightsButtonEnabled);
+                this.bookFlight();
+            }
+            if (message.value == "loggedUser")
+            {
+                bookFlightButtonEnabled = true;
+                manageFlightsButtonEnabled = false;
                 NotifyOfPropertyChange(() => bookFlightButtonEnabled);
                 NotifyOfPropertyChange(() => manageFlightsButtonEnabled);
                 this.bookFlight();

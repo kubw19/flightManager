@@ -11,6 +11,6 @@
     <property name="price" column="price" />
     <property name="date" column="date" />
     <property name="flightNumber" column="flightNumber" />
-    <property name="userId" column="userId" />
+    <many-to-one name="user" column="userId"/>
   </class>
 </hibernate-mapping>

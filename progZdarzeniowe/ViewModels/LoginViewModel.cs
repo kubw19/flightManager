@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using progZdarzeniowe.DataAccess;
 using progZdarzeniowe.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,10 @@ namespace progZdarzeniowe.ViewModels
 {
     class LoginViewModel : Screen
     {
+        public bool loginIsProceeding { get; private set; } = false;
+        public bool wrongCredentials { get; private set; } = false;
+        public string email { get; set; } = "Email";
+        public string password { get; set; } = "Password";
         private IEventAggregator _Events;
         public LoginViewModel(IEventAggregator events)
         {
@@ -36,7 +41,34 @@ namespace progZdarzeniowe.ViewModels
 
         public void loginButton()
         {
-            _Events.PublishOnUIThread(new ComEvent("loggedAdmin"));
+            getUserAsync();
+        }
+
+        private async Task getUserAsync()
+        {
+            loginIsProceeding = true;
+            NotifyOfPropertyChange(() => loginIsProceeding);
+            User user = await Task.Run(() => Database.Session.Query<User>().Where(x => x.email.Equals(email) && x.password.Equals(password)).SingleOrDefault());
+            loginIsProceeding = false;
+            NotifyOfPropertyChange(() => loginIsProceeding);
+            if (user != null)
+            {
+                Session.currentUser = user;
+                if (user.isAdmin)
+                {
+                    _Events.PublishOnUIThread(new ComEvent("loggedAdmin"));
+                }
+                else
+                {
+                    _Events.PublishOnUIThread(new ComEvent("loggedUser"));
+                }
+            }
+            else
+            {
+                wrongCredentials = true;
+                NotifyOfPropertyChange(() => wrongCredentials);
+
+            }
         }
     }
 }

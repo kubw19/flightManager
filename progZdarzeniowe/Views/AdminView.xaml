@@ -3,11 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:progZdarzeniowe.Views"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+           xmlns:local="clr-namespace:progZdarzeniowe.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="100" Margin="44,10,0,0" VerticalAlignment="Top" Width="100"/>
+    <Grid Width="800">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="131*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock FontFamily="Segoe UI Light" FontSize="36" Text="Manage Flights" Foreground="Black" Grid.ColumnSpan="2"/>
+        <DataGrid AutoGenerateColumns="False" cal:Message.Attach="[Event RowEditEnding]=[updateFlights($eventArgs)]" ItemsSource="{Binding allFlights}" HorizontalAlignment="Left" Height="369" Margin="0,71,0,0" VerticalAlignment="Top" Width="800" RowEditEnding="DataGrid_RowEditEnding" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Flight Number"
+                            Binding="{Binding flightNumber, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTemplateColumn Header="Date" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding date, UpdateSourceTrigger=LostFocus}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="80" Header="Departure"
+                            Binding="{Binding depPlace, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Departure time"
+                            Binding="{Binding depTime, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Width="80" Header="Arrival"
+                            Binding="{Binding arrPlace, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Arrival time"
+                            Binding="{Binding arrTime, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Economy price"
+                            Binding="{Binding economyPrice, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Business price"
+                            Binding="{Binding businessPrice, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTemplateColumn Header="Delete" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete" cal:Message.Attach="[Event Click]=[deleteFlight($dataContext)]" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </UserControl>
