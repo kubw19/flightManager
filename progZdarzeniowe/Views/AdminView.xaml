@@ -32,7 +32,7 @@
                 <DataGridTemplateColumn Header="Date" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding date, UpdateSourceTrigger=LostFocus}" />
+                            <DatePicker SelectedDate="{Binding date, UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
